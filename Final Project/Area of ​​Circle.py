@@ -1,1 +1,1 @@
-
+def area_circle():
