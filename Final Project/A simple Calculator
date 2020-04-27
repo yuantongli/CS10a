@@ -1,1 +1,31 @@
+PI = 3.14
+
+PRIORITY = {}
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.top = 0
+
+    def push(self, element):
+        if self.top >= len(self.stack):
+            self.stack += [element]
+        else:
+            self.stack[self.top] = element
+        self.top += 1
+
+    def pop(self):
+        if self.topp == 0:
+            return None
+        self.top -= 1
+        return self.stack[self.top]
+
+    def peek(self):
+        return self.stack[self.top - 1]
+
+    def __len__(self):
+        return self.top
+
+    def __str__(self):
+        return str.join(' ', [str(self.stack[i]) for i in range(self.top)])
 
