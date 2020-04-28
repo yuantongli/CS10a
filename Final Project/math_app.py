@@ -46,6 +46,22 @@ def calculate_triangle():
         state['triangleArea'] = 'Invalid input'
     else:
         state['triangleArea'] = res
+@app.route('/trapezoid', methods=['Get', 'Post']) 
+def trapezoid():
+    global state
+    
+    if request.method=='POST':
+        calculate_trapezoid()
+        return render_template('trapezoid.html',state=state)
+    return render_template('trapezoid.html', state=state)
+def calculate_expression():
+    global state
+    expression=request.form['expression']
+    res=mathhelper.calculate(expression)
+    if res is None:
+        state['calculation']='Invalid expression!'
+    else:
+        state['calculation']=f'The result of {expression} is {str(res)}'
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=3000, debug=True)
