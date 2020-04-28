@@ -1,1 +1,18 @@
+{% extends "fancylayout.html" %}
 
+{% block content %}
+    <div class="jumbotron">
+        <h1>Little math Helper</h1>>
+    </div>
+
+    <form method='post' action="/triangle">
+        <h4>Triangle Area</h4>>
+        Base <input type="text" name='triangleBase'>
+        Height <input type="text" name="triangleHeight">
+        <br/>
+        <h5>{{state['triangleArea']}}</h5>
+        <input type="submit" class='btn btn-lg btn-danger' value="calculate">
+    </form>
+
+{% endblock %}
+        
