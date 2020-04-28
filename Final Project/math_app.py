@@ -28,6 +28,16 @@ def triangle():
 
     return render_template('triangle',state=state)
 
+@app.route('/circle', methods=['GET', 'POST'])
+def circle():
+    global state
+    
+    if request.method=='POST':
+        calculate_circle()
+        return render_template('circle.html', state=state)
+    return render_template('circle.html', state=state)
+
+@app.route('/trapezoid', methods=['GET', 'POST'])
 def trapezoid():
     global state
     
@@ -36,7 +46,7 @@ def trapezoid():
         return render_template('trapezoid.html',state=state)
     return render_template('trapezoid.html', state=state)
 
-@app.route('/trapezoid', methods=['Get', 'Post']) 
+ 
 def calculate_expression():
     global state
     expression = request.form['expression']
