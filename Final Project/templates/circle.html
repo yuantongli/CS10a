@@ -2,4 +2,17 @@
 {% extends "fancylayout. html" %}
 
 {% block content %}
+  <div class="jumbotron">
+    <h1>Little Math Helper</h1>
+  </div>
+
+  <form method="post" action="/circle">
+    <h4>Circle Area</h4>
+    Radius<input type="text" name="circleRadius">
+    <br/>
+    <h5>{{state['circleArea']}}</h5>
+    <input type="submit" class="btn btn-lg btn-danger" value="Calculate">
+  </form>
+{% endblock %}
+     
  
