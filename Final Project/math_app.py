@@ -54,6 +54,18 @@ def calculate_triangle():
     else:
         state['triangleArea'] = res
 
+  
+def calculate_trapezoid():
+    global state
+    res = mathhelper.area_trapezoid(
+        request.form['trapezoidBottom'], 
+        request.form['trapezoidTop'], 
+        request.form['trapezoidHeight'] 
+    )
+    if res is None: 
+        state['trapezoidArea'] = 'Invalid input!'
+    else:
+        state['trapezoidArea'] = res
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=3000, debug=True)
