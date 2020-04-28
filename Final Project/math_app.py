@@ -3,21 +3,27 @@ import mathhelper
 app = Flask(__name__)
 
 global state
-state = { 'calulation':'', }
+state = { 
+    'calulation':'', 
+
+}
 
 @app.route('/', methods = ['GET'])
 def main():
+    
     global state
     return render_template('main.html', state=state)
 
 @app.route('/expression',methods=['GET', 'POST'])
 def expression():
+    
     global state
+    
     if request.method == 'POST':
         calculate_expression()
         return render_template('expression.html',state=state)
 
-    return render_template('expression',state=state)
+    return render_template('expression.html',state=state)
 
 @app.route('/triangle',methods=['GET', 'POST'])
 def triangle():
@@ -26,7 +32,7 @@ def triangle():
         calculate_triangle()
         return render_template('triangle.html',state=state)
 
-    return render_template('triangle',state=state)
+    return render_template('triangle.html',state=state)
 
 @app.route('/circle', methods=['GET', 'POST'])
 def circle():
@@ -60,11 +66,18 @@ def calculate_triangle():
     global state
     res = mathhelper.area_triangle(request.form['triangleBase'], request.form['triangleHeight'])
     if res is None:
-        state['triangleArea'] = 'Invalid input'
+        state['triangleArea'] = 'Invalid input!'
     else:
         state['triangleArea'] = res
 
-  
+def calculate_circle():
+    global state
+    res = mathhelper.area_circle(request.form['circleRadius'])
+    if res is None: 
+        state['circleArea'] = 'Invalid input!'
+    else:
+        state['circleArea'] = res
+
 def calculate_trapezoid():
     global state
     res = mathhelper.area_trapezoid(
