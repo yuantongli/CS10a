@@ -56,3 +56,77 @@ def extract_tokens(expression):
     tokens.append(current_token)
     return tokens
  
+ def convert_postfix(expression):
+    prefix_tokens = extract_tokens(expression)
+
+    PRIORITY_PARENS = 100
+    base_priority = 0
+
+    postfix_tokens = []
+
+    operands = Stack()
+    operators = Stack()
+
+    for token in prefix_tokens:
+        if token.replace('.', '').isdigit():
+            postfix_tokens.append(token)
+        elif token == '(':
+            base_priority += PRIORITY_PARENS
+        elif token == ')':
+            base_priority -= PRIORITY_PARENS
+        else:
+            while len(operators) != 0 and PRIORITY[token] + base_priority <= PRIORITY[operators.peek()]:
+                postfix_tokens.append(operators.pop())
+            operators.push(token)
+
+    while len(operators) != 0:
+        postfix_tokens.append(operators.pop())
+
+    return str.join(' ', postfix_tokens)
+
+def calculate(expression):
+    def do_calc(op1, op2, operator):
+        if operator == '+':
+            return op1 + op2
+        elif operator == '-':
+            return op1 - op2
+        elif operator == '*':
+            return op1 * op2
+        elif operator == '/':
+            return op1 / op2
+
+    try:
+        tokens = convert_postfix(expression).split(' ')
+        operands = Stack()
+
+        for token in tokens:
+            if token.replace('.', '').isdigit():
+                operands.push(float(token))
+            else:
+                #print(token)
+                op2 = operands.pop()
+                op1 = operands.pop()
+                operands.push(do_calc(op1, op2, token))
+            #print(operands)
+        return operands.pop()
+    except Exception:
+        return None
+
+def area_triangle(base, height):
+    try: 
+        return float(base) * float(height) / 2
+    except Exception:
+        return None
+
+def area_circle(r):
+    try:
+        r = float(r)
+        return PI * r * r
+    except Exception:
+        return None
+
+def area_trapezoid(top, bottom, height):
+    try:
+        return (float(top) + float(bottom)) * float(height) / 2
+    except Exception:
+        return None
