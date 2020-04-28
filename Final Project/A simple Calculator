@@ -33,4 +33,26 @@ class Stack:
 
     def __str__(self):
         return str.join(' ', [str(self.stack[i]) for i in range(self.top)])
+def extract_tokens(expression):
+    tokens = []
+    current_token = ''
+    previous_is_digit = True
+    
+    for ch in expression:
+        if ch == ' ':
+            continue
+        if ch.isdigit() or ch == '.':
+            if previous_is_digit:
+                current_token += ch
+            else:
+                tokens.append(current_token)
+                current_token = ch
+                previous_is_digit = True
+        else:
+            tokens.append(current_token)
+            current_token = ch
+            previous_is_digit = False
 
+    tokens.append(current_token)
+    return tokens
+ 
